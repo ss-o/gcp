@@ -1,3 +1,4 @@
+---
 name: "☁️ GCP Action"
 
 on:
@@ -19,6 +20,7 @@ jobs:
       cancel-in-progress: true
     steps:
       - uses: "actions/checkout@v3"
+
       # https://github.com/google-github-actions/auth#setting-up-workload-identity-federation
       - name: "Workload Identity Federation"
         id: "auth"
@@ -26,6 +28,7 @@ jobs:
         with:
           workload_identity_provider: "${{ secrets.DIGITAL_CLOUDS_PROVIDER }}"
           service_account: "${{ secrets.DIGITAL_CLOUDS_SERVICE }}"
+
       # https://github.com/google-github-actions/setup-gcloud#cloud-sdk-inputs
       - name: "Google Cloud SDK"
         id: "setup-gcloud"
@@ -34,20 +37,20 @@ jobs:
         run: "gcloud info"
 
       # https://github.com/google-github-actions/ssh-compute#inputs
-      #- name: "SSH to GCP compute instances"
-      #  id: "compute-ssh"
-      #  uses: "google-github-actions/ssh-compute@v0"
-      #  with:
-      #    instance_name: "e2"
-      #    zone: "${{ secrets.COMPUTE_ZONE }}"
-      #    ssh_private_key: "${{ secrets.GCP_SSH_PRIVATE_KEY }}"
-      #    command: "echo Hello world"
-      #- id: "test"
-      #  run: |-
-      #    echo '${{ steps.compute-ssh.outputs.stdout }}'
-      #    echo '${{ steps.compute-ssh.outputs.stderr }}'
+      - name: "SSH to GCP compute instances"
+        id: "compute-ssh"
+        uses: "google-github-actions/ssh-compute@v0"
+        with:
+          instance_name: "e2"
+          zone: "${{ secrets.COMPUTE_ZONE }}"
+          ssh_private_key: "${{ secrets.GCP_SSH_PRIVATE_KEY }}"
+          command: "echo Hello world"
+      - id: "test"
+        run: |-
+          echo '${{ steps.compute-ssh.outputs.stdout }}'
+          echo '${{ steps.compute-ssh.outputs.stderr }}'
+
       # https://github.com/google-github-actions/upload-cloud-storage#upload-cloud-storage
-      
       - name: "Upload to (GCS)"
         id: "upload-assets"
         uses: "google-github-actions/upload-cloud-storage@v0"
