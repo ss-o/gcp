@@ -67,8 +67,7 @@ jobs:
           destination: "digital-space"
           # ℹ️ Will skip directory with .gcloudignore file.
           process_gcloudignore: true
-
       - id: 'uploaded-files'
-        uses: 'ss-o/gcp/gcp-action@main'
+        uses: ./
         env:
           files: '${{ steps.upload-folder.outputs.uploaded }}'
