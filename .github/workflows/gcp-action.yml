@@ -57,7 +57,7 @@ jobs:
         with:
           path: "gcs/5f0326f2-f9c1-4d47-9772-af81d4a948de"
           destination: "digital-space"
-#      - id: 'uploaded'
-#        uses: 'ss-o/gcp@main'
-#        env:
-#          files: '${{ steps.upload-assets.outputs.uploaded }}'
+      - id: 'uploaded'
+        uses: ./.github/workflows/gcp-action.yml
+        env:
+          files: '${{ steps.upload-assets.outputs.uploaded }}'
