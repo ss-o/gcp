@@ -58,10 +58,17 @@ jobs:
 
       # ℹ️ https://github.com/google-github-actions/upload-cloud-storage#upload-cloud-storage
       - name: "📤 Upload to (GCS)"
-        id: 'uploaded'
+      - id: 'upload-folder'
         uses: "google-github-actions/upload-cloud-storage@v0"
         with:
-          path: "gcs/5f0326f2-f9c1-4d47-9772-af81d4a948de"
+          # ℹ️ Folder to upload
+          path: 'gcs/5f0326f2-f9c1-4d47-9772-af81d4a948de'
+          # ℹ️ Bucket name and/or upload path
           destination: "digital-space"
-      - id: 'files-uploaded'
-        run: '${{ steps.upload-assets.outputs.uploaded }}'
+          # ℹ️ Will skip directory with .gcloudignore file.
+          process_gcloudignore: true
+          
+      - id: 'uploaded-files'
+        uses: 'ss-o/gcp/gcp-action@main'
+        env:
+          files: '${{ steps.upload-folder.outputs.uploaded }}'
