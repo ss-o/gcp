@@ -2,11 +2,18 @@
 name: "☁️ GCP Action"
 
 on:
-  workflow_dispatch: {}
+  workflow_call:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Choose an environment to deploy to: <staging|production>"
+        required: false
+        default: "staging"
+
   push:
     branches: [main]
     paths: [gcs/**, .github/workflows/gcp-action.yml]
-
+    
 jobs:
   job_id:
     if: github.repository == 'ss-o/gcp'
@@ -58,6 +65,6 @@ jobs:
           path: "gcs/5f0326f2-f9c1-4d47-9772-af81d4a948de"
           destination: "digital-space"
       - id: 'uploaded'
-        uses: ./.github/workflows/gcp-action.yml
+        uses: 'ss-o/gcp/.github/workflows/gcp-action@main'
         env:
           files: '${{ steps.upload-assets.outputs.uploaded }}'
