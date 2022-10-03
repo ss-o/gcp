@@ -72,5 +72,5 @@ jobs:
       #  env:
       #    files: '${{ steps.upload-folder.outputs.uploaded }}'
       - id: 'uploaded-files'
-      - name: '📥 Uploaded Files'
+        name: '📥 Uploaded Files'
         run: echo ${{ steps.upload-folder.outputs.uploaded }}
