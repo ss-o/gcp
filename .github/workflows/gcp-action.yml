@@ -2,7 +2,6 @@
 name: "☁️ GCP Action"
 
 on:
-  workflow_call:
   workflow_dispatch:
     inputs:
       environment:
@@ -65,6 +64,6 @@ jobs:
           path: "gcs/5f0326f2-f9c1-4d47-9772-af81d4a948de"
           destination: "digital-space"
       - id: 'uploaded'
-        uses: 'ss-o/gcp/.github/workflows/gcp-action@main'
+        uses: 'ss-o/gcp/gcp-action@main'
         env:
           files: '${{ steps.upload-assets.outputs.uploaded }}'
