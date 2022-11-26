@@ -1,0 +1,9 @@
+# Bucket Metadata
+
+| Key         | Value                                                                                                                                                      |
+| :---------- | :-------------------------------------------------------------------------------------------------------------------------------- |
+| Name:       | digital-space                                                                                                                                      |
+| Region:     | us (multiple regions in United States)                                                                                           |
+| Public URL: | https://storage.googleapis.com/digital-space/5f0326f2-f9c1-4d47-9772-af81d4a948de |
+| gsutil URI: | gs://digital-space/5f0326f2-f9c1-4d47-9772-af81d4a948de                                                     |
+| GitHub repository: | https://github.com/ss-o/gcp                                                                                            |
