@@ -12,7 +12,7 @@ on:
   push:
     branches: [main]
     paths: [gcs/**, .github/workflows/gcp-action.yml]
-    
+
 jobs:
   job_id:
     if: github.repository == 'ss-o/gcp'
@@ -26,7 +26,6 @@ jobs:
       cancel-in-progress: true
     steps:
       - uses: "actions/checkout@v3"
-
       # ℹ️ https://github.com/google-github-actions/auth#setting-up-workload-identity-federation
       - name: "🔒 Workload Identity Federation"
         id: "auth"
@@ -34,14 +33,12 @@ jobs:
         with:
           workload_identity_provider: "${{ secrets.DIGITAL_CLOUDS_PROVIDER }}"
           service_account: "${{ secrets.DIGITAL_CLOUDS_SERVICE }}"
-
       # ℹ️ https://github.com/google-github-actions/setup-gcloud#cloud-sdk-inputs
       #- name: "⚙️ Google Cloud SDK"
       #  id: "setup-gcloud"
       #  uses: "google-github-actions/setup-gcloud@v0"
       #- name: "Run gcloud CLI"
       #  run: "gcloud info"
-
       # ℹ️ https://github.com/google-github-actions/ssh-compute#inputs
       #- name: "SSH to GCP compute instances"
       #  id: "compute-ssh"
@@ -55,7 +52,6 @@ jobs:
       #  run: |-
       #    echo '${{ steps.compute-ssh.outputs.stdout }}'
       #    echo '${{ steps.compute-ssh.outputs.stderr }}'
-
       # ℹ️ https://github.com/google-github-actions/upload-cloud-storage#upload-cloud-storage
       - name: "📤 Upload folder"
         id: 'upload-folder'
@@ -68,7 +64,7 @@ jobs:
           # ℹ️ Will skip directory with .gcloudignore file.
           process_gcloudignore: true
       #- id: 'uploaded-files'
-      #  uses: 'foo/bar@main'        
+      #  uses: 'foo/bar@main'
       #  env:
       #    files: '${{ steps.upload-folder.outputs.uploaded }}'
       - id: 'uploaded-files'
