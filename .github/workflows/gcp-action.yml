@@ -1,5 +1,5 @@
 ---
-name: "☁️ GCP Action"
+name: "☁️  GCP Action"
 
 on:
   workflow_dispatch:
@@ -54,19 +54,15 @@ jobs:
       #    echo '${{ steps.compute-ssh.outputs.stderr }}'
       # ℹ️ https://github.com/google-github-actions/upload-cloud-storage#upload-cloud-storage
       - name: "📤 Upload folder"
-        id: 'upload-folder'
+        id: "upload-folder"
         uses: "google-github-actions/upload-cloud-storage@v1"
         with:
           # ℹ️ Folder to upload
-          path: 'gcs/5f0326f2-f9c1-4d47-9772-af81d4a948de'
+          path: "gcs/5f0326f2-f9c1-4d47-9772-af81d4a948de"
           # ℹ️ Bucket name and/or upload path
           destination: "digital-space"
           # ℹ️ Will skip directory with .gcloudignore file.
           process_gcloudignore: true
-      #- id: 'uploaded-files'
-      #  uses: 'foo/bar@main'
-      #  env:
-      #    files: '${{ steps.upload-folder.outputs.uploaded }}'
-      - id: 'uploaded-files'
-        name: '📥 Uploaded Files'
+      - id: "uploaded-files"
+        name: "📥 Uploaded Files"
         run: echo ${{ steps.upload-folder.outputs.uploaded }}
