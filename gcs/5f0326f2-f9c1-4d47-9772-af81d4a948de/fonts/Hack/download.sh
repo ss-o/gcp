@@ -64,8 +64,11 @@ err() {
 
 # Help function
 _help() {
-  say "Basic usage: $CURRENT_SCRIPT [options] [arguments]"
-  return 1
+  say -n -green "Basic usage: "
+  say "$CURRENT_SCRIPT [options]"
+  say "$CURRENT_SCRIPT -i, --install"
+  say "$CURRENT_SCRIPT -h, --help"
+  return 0
 }
 
 # Ensure requirements
@@ -173,6 +176,7 @@ _prepare() {
 
 _do_options() {
   [ $# = 0 ] && _help
+  ex_code=$?
   while [ $# -gt 0 ]; do
     case "$1" in
     -h | --help)
@@ -180,7 +184,7 @@ _do_options() {
       ex_code=$?
       ;;
     -i | --install)
-      _prepare
+      _prepare "$@"
       ex_code=$?
       ;;
     *) err "Unknown option." ;;
