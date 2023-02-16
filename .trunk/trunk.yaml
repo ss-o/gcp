@@ -1,4 +1,6 @@
 version: 0.1
+cli:
+  version: 1.4.1
 actions:
   enabled:
     - trunk-announce
@@ -18,11 +20,13 @@ lint:
     - actionlint@1.6.23
     - git-diff-check
     - gitleaks@8.15.3
-    - prettier@2.8.3
-cli:
-  version: 1.4.1
+    - prettier@2.8.4
+  ignore:
+    - linters: [ALL]
+      paths:
+        - "**/*.ttf"
 plugins:
   sources:
     - id: trunk
-      ref: v0.0.8
+      ref: v0.0.10
       uri: https://github.com/trunk-io/plugins

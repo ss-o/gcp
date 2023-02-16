@@ -58,7 +58,7 @@ jobs:
         uses: "google-github-actions/upload-cloud-storage@v1"
         with:
           # ℹ️ Folder to upload
-          path: "gcs/5f0326f2-f9c1-4d47-9772-af81d4a948de"
+          path: "assets/5f0326f2-f9c1-4d47-9772-af81d4a948de"
           # ℹ️ Bucket name and/or upload path
           destination: "digital-space"
           # ℹ️ Will skip directory with .gcloudignore file.
