@@ -11,7 +11,7 @@ on:
 
   push:
     branches: [main]
-    paths: [gcs/**, .github/workflows/gcp-action.yml]
+    paths: [assets/**, .github/workflows/gcp-action.yml]
 
 jobs:
   job_id:
