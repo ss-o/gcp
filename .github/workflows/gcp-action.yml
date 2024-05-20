@@ -25,7 +25,7 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
     steps:
-      - uses: "actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11" # v4
+      - uses: "actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29" # v4
       # ℹ️ https://github.com/google-github-actions/auth#setting-up-workload-identity-federation
       - name: "🔒 Workload Identity Federation"
         id: "auth"
