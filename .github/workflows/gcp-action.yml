@@ -19,20 +19,20 @@ jobs:
     name: "🆙 GCP"
     runs-on: ubuntu-latest
     permissions:
-      contents: "read"
-      id-token: "write"
+      contents: read
+      id-token: write
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
     steps:
-      - uses: "actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11" # v4
+      - uses: actions/checkout@v4
       # ℹ️ https://github.com/google-github-actions/auth#setting-up-workload-identity-federation
-      - name: "🔒 Workload Identity Federation"
-        id: "auth"
-        uses: "google-github-actions/auth@55bd3a7c6e2ae7cf1877fd1ccb9d54c0503c457c" # v2
+      - name: 🔒 Workload Identity Federation
+        id: auth
+        uses: google-github-actions/auth@v2
         with:
-          workload_identity_provider: "${{ secrets.DIGITAL_CLOUDS_PROVIDER }}"
-          service_account: "${{ secrets.DIGITAL_CLOUDS_SERVICE }}"
+          workload_identity_provider: ${{ secrets.DIGITAL_CLOUDS_PROVIDER }}
+          service_account: ${{ secrets.DIGITAL_CLOUDS_SERVICE }}
       # ℹ️ https://github.com/google-github-actions/setup-gcloud#cloud-sdk-inputs
       #- name: "⚙️ Google Cloud SDK"
       #  id: "setup-gcloud"
@@ -53,9 +53,9 @@ jobs:
       #    echo '${{ steps.compute-ssh.outputs.stdout }}'
       #    echo '${{ steps.compute-ssh.outputs.stderr }}'
       # ℹ️ https://github.com/google-github-actions/upload-cloud-storage#upload-cloud-storage
-      - name: "📤 Upload folder"
-        id: "upload-folder"
-        uses: "google-github-actions/upload-cloud-storage@22121cd842b0d185e042e28d969925b538c33d77" # v2
+      - name: 📤 Upload folder
+        id: upload-folder
+        uses: google-github-actions/upload-cloud-storage@v2
         with:
           # ℹ️ Folder to upload
           path: "assets/5f0326f2-f9c1-4d47-9772-af81d4a948de"
@@ -63,6 +63,6 @@ jobs:
           destination: "digital-space"
           # ℹ️ Will skip directory with .gcloudignore file.
           process_gcloudignore: true
-      - id: "uploaded-files"
-        name: "📥 Uploaded Files"
+      - id: uploaded-files
+        name: 📥 Uploaded Files
         run: echo ${{ steps.upload-folder.outputs.uploaded }}
